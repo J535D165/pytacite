@@ -164,12 +164,12 @@ def test_sort_dois():
     newest_first = (
         DOIs().query("climate").sort("created", ascending=False).get(per_page=1)
     )
-    assert newest_first[0]["attributes"]["publicationYear"] >= 2023
+    assert newest_first[0]["attributes"]["created"] >= 2023
 
     oldest_first = (
         DOIs().query("climate").sort("created", ascending=True).get(per_page=1)
     )
-    assert oldest_first[0]["attributes"]["publicationYear"] <= 2011
+    assert oldest_first[0]["attributes"]["created"] <= 2011
 
 
 # def test_query_error():
