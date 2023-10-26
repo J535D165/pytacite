@@ -1,6 +1,6 @@
 # pytacite
 
-![PyPI](https://img.shields.io/pypi/v/pytacite) [![DOI](https://zenodo.org/badge/557541347.svg)](https://zenodo.org/badge/latestdoi/557541347)
+![PyPI](https://img.shields.io/pypi/v/pytacite) [![DOI](https://zenodo.org/badge/669607966.svg)](https://zenodo.org/doi/10.5281/zenodo.10043750)
 
 Pytacite is a Python library for [DataCite](https://datacite.org/). DataCite is a non-profit organisation that provides persistent identifiers (DOIs) for research data and other research outputs. It holds a large index of metadata of outputs. DataCite offers an open and free [REST API](https://support.datacite.org/docs/api) to query metadata.
 Pytacite is a lightweight and thin Python interface to this API. Pytacite aims to
