@@ -5,7 +5,7 @@ from urllib.parse import quote_plus
 import requests
 
 try:
-    from pydatacite._version import __version__
+    from pytacite._version import __version__
 except ImportError:
     __version__ = "0.0.0"
 
@@ -189,7 +189,7 @@ class BaseDataCite:
 
         res = requests.get(
             url,
-            headers={"User-Agent": "pydatacite/" + __version__, "email": config.email},
+            headers={"User-Agent": "pytacite/" + __version__, "email": config.email},
         )
 
         # handle query errors
@@ -231,7 +231,7 @@ class BaseDataCite:
         """Used for paging results of large responses using cursor paging.
 
         DataCite offers two methods for paging: basic paging and cursor paging.
-        Both methods are supported by pydatacite, although cursor paging seems to be
+        Both methods are supported by pytacite, although cursor paging seems to be
         easier to implement and less error-prone.
 
         Args:

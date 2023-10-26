@@ -1,5 +1,5 @@
-from pydatacite.base import BaseDataCite
-from pydatacite.base import _pipe_method
+from pytacite.base import BaseDataCite
+from pytacite.base import _pipe_method
 
 
 class DOI(dict):

@@ -5,23 +5,23 @@ import pytest
 import requests
 from requests import HTTPError
 
-import pydatacite
-from pydatacite import DOI
-from pydatacite import ClientPrefixes
-from pydatacite import Clients
-from pydatacite import DOIs
-from pydatacite import Events
-from pydatacite import Prefixes
-from pydatacite import ProviderPrefixes
-from pydatacite import Providers
+import pytacite
+from pytacite import DOI
+from pytacite import ClientPrefixes
+from pytacite import Clients
+from pytacite import DOIs
+from pytacite import Events
+from pytacite import Prefixes
+from pytacite import ProviderPrefixes
+from pytacite import Providers
 
-# from pydatacite import Reports
+# from pytacite import Reports
 
 
 def test_config():
-    pydatacite.config.email = "pydatacite_github_unittests@example.com"
+    pytacite.config.email = "pytacite_github_unittests@example.com"
 
-    assert pydatacite.config.email == "pydatacite_github_unittests@example.com"
+    assert pytacite.config.email == "pytacite_github_unittests@example.com"
 
 
 @pytest.mark.parametrize(
@@ -277,7 +277,7 @@ def test_serializable(tmpdir):
 
 # def test_and_operator():
 
-#     # https://github.com/J535D165/pydatacite/issues/11
+#     # https://github.com/J535D165/pytacite/issues/11
 #     url = "https://api.datacite.org/dois?filter=institutions.country_code:tw,institutions.country_code:hk,institutions.country_code:us,publicationYear:2022"  # noqa
 
 #     assert (

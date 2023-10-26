@@ -1,12 +1,12 @@
-# pydatacite
+# pytacite
 
-![PyPI](https://img.shields.io/pypi/v/pydatacite) [![DOI](https://zenodo.org/badge/557541347.svg)](https://zenodo.org/badge/latestdoi/557541347)
+![PyPI](https://img.shields.io/pypi/v/pytacite) [![DOI](https://zenodo.org/badge/557541347.svg)](https://zenodo.org/badge/latestdoi/557541347)
 
-Pydatacite is a Python library for [DataCite](https://datacite.org/). Datacite is a non-profit organisation that provides persistent identifiers (DOIs) for research data and other research outputs. It holds a large index of metadata of outputs. DataCite offers an open and free [REST API](https://support.datacite.org/docs/api) to query metadata.
-Pydatacite is a lightweight and thin Python interface to this API. Pydatacite aims to
+Pytacite is a Python library for [DataCite](https://datacite.org/). DataCite is a non-profit organisation that provides persistent identifiers (DOIs) for research data and other research outputs. It holds a large index of metadata of outputs. DataCite offers an open and free [REST API](https://support.datacite.org/docs/api) to query metadata.
+Pytacite is a lightweight and thin Python interface to this API. Pytacite aims to
 stay as close as possible to the design of the original service.
 
-The following features of DataCite are currently supported by pydatacite:
+The following features of DataCite are currently supported by pytacite:
 
 - [x] Get single entities
 - [x] Filter and query entities
@@ -21,20 +21,20 @@ We aim to cover the entire API, and we are looking for help. We are welcoming Pu
 
 ## Key features
 
-- **Pipe operations** - pydatacite can handle multiple operations in a sequence. This allows the developer to write understandable queries. For examples, see [code snippets](#code-snippets).
-- **Permissive license** - [DataCite data is CC0 licensed](https://support.datacite.org/docs/datacite-data-file-use-policy) :raised_hands:. pydatacite is published under the MIT license.
+- **Pipe operations** - pytacite can handle multiple operations in a sequence. This allows the developer to write understandable queries. For examples, see [code snippets](#code-snippets).
+- **Permissive license** - [DataCite data is CC0 licensed](https://support.datacite.org/docs/datacite-data-file-use-policy) :raised_hands:. pytacite is published under the MIT license.
 
 ## Installation
 
-pydatacite requires Python 3.8 or later.
+pytacite requires Python 3.8 or later.
 
 ```sh
-pip install pydatacite
+pip install pytacite
 ```
 
 ## Getting started
 
-Pydatacite offers support for:
+Pytacite offers support for:
 [DOIs](https://support.datacite.org/reference/get_dois),
 [Clients](https://support.datacite.org/reference/get_clients),
 [ClientPrefixes](https://support.datacite.org/reference/get_client-prefixes),
@@ -45,7 +45,7 @@ Pydatacite offers support for:
 
 
 ```python
-from pydatacite import DOIs, Clients, Events, Prefixes, ClientPrefixes, Providers, ProviderPrefixes
+from pytacite import DOIs, Clients, Events, Prefixes, ClientPrefixes, Providers, ProviderPrefixes
 ```
 
 ### Get single entity
@@ -173,7 +173,7 @@ See DataCite on [logical operators](https://support.datacite.org/docs/api-querie
 #### Paging
 
 DataCite offers two methods for paging: [basic paging](https://support.datacite.org/docs/pagination#page-number-up-to-10000-records) and [cursor paging](https://support.datacite.org/docs/pagination#cursor). Both methods are supported by
-pydatacite.
+pytacite.
 
 ##### Basic (offset) paging
 
@@ -202,7 +202,7 @@ for page in pager:
 
 ```python
 from itertools import chain
-from pydatacite import DOIs
+from pytacite import DOIs
 
 query = DOIs().filter(prefix="10.5438")
 
@@ -225,7 +225,7 @@ A list of awesome use cases of the DataCite dataset.
 ### Creators of a dataset
 
 ```python
-from pydatacite import DOIs
+from pytacite import DOIs
 
 w = DOIs()["10.34894/HE6NAQ"]
 
@@ -250,7 +250,7 @@ Resources:
 
 Get the DataCite identifier of the client first:
 ```python
-from pydatacite import Clients
+from pytacite import Clients
 
 c = Clients().query("Zenodo").get()
 print(c[0]["id"])
@@ -271,7 +271,7 @@ DOIs() \
 ### Number of repositories running on Dataverse software
 
 ```python
-from pydatacite import Clients
+from pytacite import Clients
 
 Clients() \
   .filter(software="dataverse") \
@@ -281,7 +281,7 @@ Clients() \
 
 ## Alternatives
 
-[datacite](https://pypi.org/project/datacite/) is a nice Python wrapper for Metadata Store API which is not covered by pydatacite.
+[datacite](https://pypi.org/project/datacite/) is a nice Python wrapper for Metadata Store API which is not covered by pytacite.
 
 R users can use [RDataCite](https://github.com/ropensci/rdatacite) library.
 

@@ -1,30 +1,30 @@
 try:
-    from pydatacite._version import __version__
-    from pydatacite._version import __version_tuple__
+    from pytacite._version import __version__
+    from pytacite._version import __version_tuple__
 except ImportError:
     __version__ = "0.0.0"
     __version_tuple__ = (0, 0, 0)
 
 
-from pydatacite.api import DOI
-from pydatacite.api import Client
-from pydatacite.api import ClientPrefix
-from pydatacite.api import ClientPrefixes
-from pydatacite.api import Clients
-from pydatacite.api import DOIs
-from pydatacite.api import Event
-from pydatacite.api import Events
-from pydatacite.api import Prefix
-from pydatacite.api import Prefixes
-from pydatacite.api import Provider
-from pydatacite.api import ProviderPrefix
-from pydatacite.api import ProviderPrefixes
-from pydatacite.api import Providers
+from pytacite.api import DOI
+from pytacite.api import Client
+from pytacite.api import ClientPrefix
+from pytacite.api import ClientPrefixes
+from pytacite.api import Clients
+from pytacite.api import DOIs
+from pytacite.api import Event
+from pytacite.api import Events
+from pytacite.api import Prefix
+from pytacite.api import Prefixes
+from pytacite.api import Provider
+from pytacite.api import ProviderPrefix
+from pytacite.api import ProviderPrefixes
+from pytacite.api import Providers
 
-# from pydatacite.api import Report
-# from pydatacite.api import Reports
-from pydatacite.base import QueryError
-from pydatacite.base import config
+# from pytacite.api import Report
+# from pytacite.api import Reports
+from pytacite.base import QueryError
+from pytacite.base import config
 
 __all__ = [
     "DOI",

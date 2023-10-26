@@ -1,5 +1,5 @@
 [project]
-name = "pydatacite"
+name = "pytacite"
 description = "A flexible and lightweight Python interface to the DataCite database"
 authors = [
     { name = "Jonathan de Bruin", email = "jonathandebruinos@gmail.com" }
@@ -28,10 +28,10 @@ build-backend = 'setuptools.build_meta'
 requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
 
 [tool.setuptools]
-packages = ["pydatacite"]
+packages = ["pytacite"]
 
 [tool.setuptools_scm]
-write_to = "pydatacite/_version.py"
+write_to = "pytacite/_version.py"
 
 [tool.ruff]
 select = ["E", "F", "UP", "I", "B"]

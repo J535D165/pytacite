@@ -4,7 +4,7 @@ authors:
 - family-names: "De Bruin"
   given-names: "Jonathan"
   orcid: "https://orcid.org/0000-0002-4297-0502"
-title: "pydatacite"
+title: "pytacite"
 version: 0.8
 date-released: 2023-03-19
-url: "https://github.com/J535D165/pydatacite"
+url: "https://github.com/J535D165/pytacite"
