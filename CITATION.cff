@@ -1,10 +1,22 @@
 cff-version: 1.2.0
+title: >-
+  pytacite - A flexible and lightweight Python interface to
+  the DataCite database
 message: 'We appreciate, but do not require, attribution.'
+type: software
 authors:
-- family-names: "De Bruin"
-  given-names: "Jonathan"
-  orcid: "https://orcid.org/0000-0002-4297-0502"
-title: "pytacite"
-version: 0.8
-date-released: 2023-03-19
-url: "https://github.com/J535D165/pytacite"
+  - family-names: De Bruin
+    given-names: Jonathan
+    orcid: 'https://orcid.org/0000-0002-4297-0502'
+repository-code: 'https://github.com/J535D165/pytacite'
+url: 'https://github.com/J535D165/pytacite'
+repository-artifact: 'https://pypi.org/project/pytacite/'
+keywords:
+  - data-repository
+  - data-management
+  - research
+  - dataset
+  - research-software
+  - metadata
+license: MIT
+
