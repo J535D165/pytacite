@@ -56,12 +56,14 @@ Get a single DOI, Event, Prefix, ProviderPrefix from DataCite by the id.
 DOIs()["10.14454/FXWS-0523"]
 ```
 
-The result is a `DOI` object, which is very similar to a dictionary. Find the available fields with `.keys()`.
+The result is a `DOI` object, which is very similar to a dictionary. Find the
+available fields with `.keys()`. Most interesting attributes are stored in
+the `"attributes"` field.
 
 For example, get the titles:
 
 ```python
-DOIs()["10.14454/FXWS-0523"]["titles"]
+DOIs()["10.14454/FXWS-0523"]["attributes"]["titles"]
 ```
 
 ```python
@@ -73,14 +75,6 @@ It works similar for other resource collections.
 ```python
 Prefixes()["10.12682"]
 Events()["9a34e232-5b30-453b-a393-ea10a6ce565d"]
-```
-
-#### Get random DOIs
-
-Get [random DOIs](https://support.datacite.org/docs/api-sampling).
-
-```python
-DOIs().random().get(per_page=10)
 ```
 
 ### Get lists of entities
@@ -95,7 +89,7 @@ filters.
 
 ```python
 DOIs().count()
-# 47824931
+# 50869984
 ```
 
 For lists of entities, you can return the result as well as the metadata. By default, only the results are returned.
@@ -106,12 +100,24 @@ results, meta = DOIs().get(return_meta=True)
 
 ```python
 print(meta)
-{'count': 65073, 'db_response_time_ms': 16, 'page': 1, 'per_page': 25}
-```
+{'total': 50869984,
+ 'totalPages': 400,
+ 'page': 1,
+ 'states': [{'id': 'findable', 'title': 'Findable', 'count': 50869984}],
+ 'resourceTypes': [{'id': 'dataset', 'title': 'Dataset', 'count': 15426144}, <...>]
+ <...>
+ 'subjects': [{'id': 'FOS: Biological sciences',
+   'title': 'Fos: Biological Sciences',
+   'count': 3304486}, <...>],
+ 'citations': [],
+ 'views': [],
+ 'downloads': []}
+ ```
 
 #### Filters and queries
 
-DataCite makes use of filter and queries. Filters can narrow down queries and queries can help to search fields. See:
+DataCite makes use of filter and queries. Filters can narrow down queries `
+(~.~)` and queries can help to search fields. See:
 
 - Filtering: https://support.datacite.org/docs/api-queries#filtering-list-responses
 - Making Queries: https://support.datacite.org/docs/api-queries#making-queries
@@ -145,11 +151,12 @@ example, filter on [`creators.nameIdentifiers.nameIdentifierScheme`](https://sup
 In case of nested attribute filters, use a dict to build the query.
 
 ```python
-DOIs()
-  .query(creators={"nameIdentifiers": {"nameIdentifierScheme": "ORCID"}})
-  .query(publicationYear=2016)
-  .query(language="es")
+DOIs() \
+  .query(creators={"nameIdentifiers": {"nameIdentifierScheme": "ORCID"}}) \
+  .query(publicationYear=2016) \
+  .query(language="es") \
   .count()
+# 562
 ```
 
 #### Sort entity lists
@@ -168,9 +175,9 @@ See DataCite on [logical operators](https://support.datacite.org/docs/api-querie
 DataCite offers two methods for paging: [basic paging](https://support.datacite.org/docs/pagination#page-number-up-to-10000-records) and [cursor paging](https://support.datacite.org/docs/pagination#cursor). Both methods are supported by
 pydatacite.
 
-##### Basic paging
+##### Basic (offset) paging
 
-Only the first 10,000 records can be retrieved with basic paging.
+Only the first 10,000 records can be retrieved with basic (offset)paging.
 
 ```python
 pager = DOIs().filter(prefix="10.5438").paginate(method="number", per_page=100)
@@ -191,6 +198,25 @@ for page in pager:
     print(len(page))
 ```
 
+> Looking for an easy method to iterate the records of a pager?
+
+```python
+from itertools import chain
+from pydatacite import DOIs
+
+query = DOIs().filter(prefix="10.5438")
+
+for record in chain(*query.paginate(per_page=100)):
+    print(record["id"])
+```
+
+#### Get random DOIs
+
+Get [random DOIs](https://support.datacite.org/docs/api-sampling). Somehow, this has very slow response times (caused by DataCite).
+
+```python
+DOIs().random().get(per_page=10)
+```
 
 ## Code snippets
 
@@ -222,31 +248,18 @@ Resources:
 - https://support.datacite.org/reference/get_clients
 - https://support.datacite.org/reference/get_dois
 
+Get the DataCite identifier of the client first:
 ```python
 from pydatacite import Clients
 
 c = Clients().query("Zenodo").get()
 print(c[0]["id"])
-[{'id': 'cern.zenodo',
-  'type': 'clients',
-  'attributes': {'name': 'Zenodo',
-   'symbol': 'CERN.ZENODO',
-   'year': 2013,
-   'alternateName': 'Research. Shared',
-   'description': 'ZENODO builds and operates a simple and innovative service<...>',
-   'language': ['en'],
-   'clientType': 'repository',
-   'domains': 'openaire.cern.ch,zenodo.org',
-   're3data': 'https://doi.org/10.17616/R3QP53',
-   'opendoar': None,
-   'issn': {},
-   'url': 'https://zenodo.org/',
-   'created': '2013-01-28T12:07:48Z',
-   'updated': '2020-06-26T12:22:29Z',
-   'isActive': True},
-  'relationships': {'provider': {'data': {'id': 'cern', 'type': 'providers'}},
-   'prefixes': {'data': [{'id': '10.5281', 'type': 'prefixes'}]}}}]
+# cern.zenodo
+```
 
+Filter the DOIs on the client identifier. It can be a bit confusing when to use `filter` and `query` here.
+
+```python
 DOIs() \
   .filter(client_id=c[0]["id"]) \
   .filter(resource_type_id="software") \
@@ -255,7 +268,7 @@ DOIs() \
 # 9720
 ```
 
-### Number of dataverse instances
+### Number of repositories running on Dataverse software
 
 ```python
 from pydatacite import Clients
@@ -264,18 +277,6 @@ Clients() \
   .filter(software="dataverse") \
   .count()
 # 31
-```
-
-## Experimental
-
-### Authentication
-
-DataCite experiments with authenticated requests at the moment. Authenticate your requests with
-
-```python
-import pydatacite
-
-pydatacite.config.api_key = "<MY_KEY>"
 ```
 
 ## Alternatives
@@ -289,6 +290,8 @@ R users can use [RDataCite](https://github.com/ropensci/rdatacite) library.
 [MIT](/LICENSE)
 
 ## Contact
+
+> This library is a community contribution. The authors of this Python library aren't affiliated with DataCite.
 
 Feel free to reach out with questions, remarks, and suggestions. The
 [issue tracker](/issues) is a good starting point. You can also email me at
