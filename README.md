@@ -26,7 +26,7 @@ We aim to cover the entire API, and we are looking for help. We are welcoming Pu
 
 ## Installation
 
-pydatacite requires Python 3.7 or later.
+pydatacite requires Python 3.8 or later.
 
 ```sh
 pip install pydatacite
