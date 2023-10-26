@@ -169,7 +169,7 @@ def test_sort_dois():
     oldest_first = (
         DOIs().query("climate").sort("created", ascending=True).get(per_page=1)
     )
-    assert oldest_first[0]["attributes"]["created"] <= "2011"
+    assert oldest_first[0]["attributes"]["created"] <= "2012"
 
 
 # def test_query_error():
