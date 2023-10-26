@@ -18,7 +18,7 @@ class Config(dict):
         return super().__setitem__(key, value)
 
 
-config = Config(email=None, api_key=None, api_url="https://api.datacite.org")
+config = Config(email=None, api_url="https://api.datacite.org")
 
 
 def _pipe_method(func):
@@ -187,11 +187,9 @@ class BaseDataCite:
 
     def _get_raw(self, url):
 
-        params = {"api_key": config.api_key} if config.api_key else {}
         res = requests.get(
             url,
             headers={"User-Agent": "pydatacite/" + __version__, "email": config.email},
-            params=params,
         )
 
         # handle query errors

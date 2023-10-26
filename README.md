@@ -48,18 +48,6 @@ Pydatacite offers support for:
 from pydatacite import DOIs, Clients, Events, Prefixes, ClientPrefixes, Providers, ProviderPrefixes
 ```
 
-### The polite pool
-
-[The polite pool](https://docs.datacite.org/how-to-use-the-api/rate-limits-and-authentication#the-polite-pool) has much
-faster and more consistent response times. To get into the polite pool, you
-set your email:
-
-```python
-import pydatacite
-
-pydatacite.config.email = "mail@example.com"
-```
-
 ### Get single entity
 
 Get a single DOI, Event, Prefix, ProviderPrefix from DataCite by the id.
