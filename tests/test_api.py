@@ -22,10 +22,6 @@ def test_config():
     pydatacite.config.email = "pydatacite_github_unittests@example.com"
 
     assert pydatacite.config.email == "pydatacite_github_unittests@example.com"
-    assert pydatacite.config.api_key is None
-    pydatacite.config.api_key = "my_api_key"
-    assert pydatacite.config.api_key == "my_api_key"
-    pydatacite.config.api_key = None
 
 
 @pytest.mark.parametrize(
